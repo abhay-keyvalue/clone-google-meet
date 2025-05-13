@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import NavigationMenu from './components/NavigationMenu';
 import LandingPage from './components/LandingPage';
+import GoogleApps from './components/GoogleApps';
+import ProfileButton from './components/ProfileButton';
 
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,39 +83,8 @@ export default function Page() {
           <button className={styles.feedbackButton}>
             <span className={styles.materialIcon}>feedback</span>
           </button>
-          <a 
-            className={styles.googleAppsButton}
-            href="https://www.google.co.in/intl/en-GB/about/products"
-            aria-label="Google apps"
-            role="button"
-            tabIndex={0}
-          >
-            <svg className={styles.googleAppsIcon} focusable="false" viewBox="0 0 24 24">
-              <path d="M6,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM16,6c0,1.1 0.9,2 2,2s2,-0.9 2,-2 -0.9,-2 -2,-2 -2,0.9 -2,2zM12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2z"></path>
-            </svg>
-          </a>
-          <a 
-            className={styles.profileButton}
-            href="https://accounts.google.com/SignOutOptions"
-            aria-expanded="false"
-            aria-label="Google Account: Aswin Dev S (aswin.d@keyvalue.systems)"
-            role="button"
-            tabIndex={0}
-          >
-            <img 
-              className={styles.profileImage}
-              src="https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png"
-              srcSet="https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png 1x, https://www.gstatic.com/images/branding/product/2x/avatar_circle_blue_512dp.png 2x"
-              alt=""
-              aria-hidden="true"
-            />
-            <div className={styles.notificationIndicator}>
-              <svg className={styles.notificationIcon} height="14" viewBox="0 0 14 14" width="14">
-                <circle className={styles.notificationCircle} cx="7" cy="7" r="7"></circle>
-                <path className={styles.notificationPath} d="M6 10H8V12H6V10ZM6 2H8V8H6V2Z"></path>
-              </svg>
-            </div>
-          </a>
+          <GoogleApps />
+          <ProfileButton />
         </div>
       </header>
 

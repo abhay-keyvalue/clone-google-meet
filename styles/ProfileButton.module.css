@@ -1,0 +1,140 @@
+.profileContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.profileButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  margin-left: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.profileButton:hover {
+  background-color: #f1f3f4;
+}
+
+.profileImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.notificationIndicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+}
+
+.notificationIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.notificationCircle {
+  fill: #1a73e8;
+}
+
+.notificationPath {
+  fill: white;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  z-index: 1000;
+}
+
+.profileInfo {
+  padding: 16px;
+  border-bottom: 1px solid #e8eaed;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profileImageLarge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.profileDetails {
+  flex: 1;
+}
+
+.profileName {
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+  margin-bottom: 4px;
+}
+
+.profileEmail {
+  font-size: 14px;
+  color: #5f6368;
+}
+
+.menuItems {
+  padding: 8px 0;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menuItem:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.menuIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuItem span {
+  font-size: 14px;
+  color: #202124;
+}
+
+@media (max-width: 768px) {
+  .profileButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profileImage {
+    width: 28px;
+    height: 28px;
+  }
+} 

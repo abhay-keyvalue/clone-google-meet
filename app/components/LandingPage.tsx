@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../styles/LandingPage.module.css';
 import FeatureCarousel from './FeatureCarousel';
+import GoogleApps from './GoogleApps';
 
 export default function LandingPage() {
   const router = useRouter();
