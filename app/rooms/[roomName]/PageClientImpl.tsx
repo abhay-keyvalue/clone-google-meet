@@ -8,13 +8,13 @@ import { ConnectionDetails } from '@/lib/types';
 import {
   formatChatMessageLinks,
   LocalUserChoices,
-  PreJoin,
   RoomContext,
   VideoConference,
+  PreJoin,
   ControlBar,
   useTracks,
   useLocalParticipant,
-} from '@livekit/components-react';
+} from '@/app/liveKit/components-react';
 import {
   PreJoin,
 } from '../../liveKit/components-react/src/prefabs/PreJoin';
