@@ -10,11 +10,13 @@ import {
   LocalUserChoices,
   RoomContext,
   VideoConference,
-  PreJoin,
   ControlBar,
   useTracks,
   useLocalParticipant,
 } from '@/app/liveKit/components-react';
+import {
+  PreJoin,
+} from '../../liveKit/components-react/src/prefabs/PreJoin';
 import {
   ExternalE2EEKeyProvider,
   RoomOptions,
@@ -28,6 +30,7 @@ import {
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import styles from './Meeting.module.css';
+import PrejoinHeader from '@/app/components/PrejoinHeader';
 
 const CONN_DETAILS_ENDPOINT =
   process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/api/connection-details';
@@ -93,9 +96,10 @@ export function PageClientImpl(props: {
   const handlePreJoinError = React.useCallback((e: any) => console.error(e), []);
 
   return (
-    <main className={styles.container}>
+    <main style={{backgroundColor: '#FFF'}}>
       {connectionDetails === undefined || preJoinChoices === undefined ? (
-        <div className={styles.preJoinContainer}>
+        <div style={{backgroundColor: 'red'}}>
+          <PrejoinHeader /> 
           <PreJoin
             defaults={preJoinDefaults}
             onSubmit={handlePreJoinSubmit}

@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 const GOOGLE_MEET_ICON = 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg';
 
+
 export const metadata: Metadata = {
   title: {
     default: 'Google Meet',
