@@ -1,0 +1,220 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  color: #202124;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #5f6368;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.meetingActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newMeetingButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.newMeetingButton:hover {
+  background-color: #1557b0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.joinMeeting {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.meetingInput {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.meetingInput:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+.joinButton {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.joinButton:hover {
+  background-color: #1557b0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.joinButton:disabled {
+  background-color: #dadce0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+  padding: 0 1rem;
+}
+
+.feature {
+  text-align: center;
+  padding: 1rem;
+}
+
+.featureImage {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.feature h3 {
+  color: #202124;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.feature p {
+  color: #5f6368;
+  line-height: 1.5;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 1rem 2rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #5f6368;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.footerRight {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer a {
+  color: #1a73e8;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .meetingActions {
+    padding: 0 1rem;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .footerContent {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .featureImage {
+    max-width: 250px;
+  }
+} 

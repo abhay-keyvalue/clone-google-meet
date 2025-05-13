@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Google Sans';
 }
 
 html {
@@ -32,7 +33,7 @@ body {
 }
 
 .header > h2 {
-  font-family: 'TWK Everett', sans-serif;
+  font-family: 'Google Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
