@@ -1,0 +1,363 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  color: #202124;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #5f6368;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.meetingActions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.newMeetingButton {
+  composes: UywwFc-RLmnJb from global;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  font-family: 'Google Sans', sans-serif;
+  width: auto;
+  min-width: 160px;
+  margin: 0;
+}
+
+.newMeetingButton:hover {
+  background-color: #1557b0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.joinMeeting {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 1;
+}
+
+.joinInputWrapper {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f4;
+  border-radius: 24px;
+  padding: 0.5rem;
+  flex: 1;
+  gap: 0.5rem;
+  height: 48px;
+}
+
+.joinInputIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.joinInputIconInner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #242424;
+  border-radius: 50%;
+}
+
+.joinInputIconText {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background-color: #242424;
+  bottom: 2px;
+}
+
+.joinInputIconOuter {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #242424;
+  border-radius: 50%;
+}
+
+.joinInputContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.joinInput {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #202124;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.joinInput:focus {
+  outline: none;
+}
+
+.joinInput::placeholder {
+  color: #5f6368;
+}
+
+.material-icons {
+  color: #242424;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color-scheme: light;
+}
+
+.joinButton {
+  background-color: #ffffff;
+  color: rgb(78, 78, 78);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  font-family: 'Google Sans', sans-serif;
+  white-space: nowrap;
+  height: 48px;
+}
+
+.joinButton:hover {
+  background-color: hsl(214, 100%, 71%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.joinButton:disabled {
+  background-color: #dadce0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+  padding: 0 1rem;
+}
+
+.feature {
+  text-align: center;
+  padding: 1rem;
+}
+
+.featureImage {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.feature h3 {
+  color: #202124;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.feature p {
+  color: #5f6368;
+  line-height: 1.5;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 1rem 2rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #5f6368;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.footerRight {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer a {
+  color: #1a73e8;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .meetingActions {
+    padding: 0 1rem;
+    flex-direction: column;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .footerContent {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .featureImage {
+    max-width: 250px;
+  }
+
+  .newMeetingButton {
+    width: 100%;
+  }
+
+  .joinMeeting {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .joinButton {
+    width: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #dadce0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.newMeetingWrapper {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 280px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 14px;
+  color: #202124;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #f1f3f4;
+}
+
+.dropdownItem i {
+  color: #5f6368;
+  font-size: 20px;
+} 

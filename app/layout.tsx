@@ -1,48 +1,43 @@
 import '../styles/globals.css';
-import '@livekit/components-styles';
-import '@livekit/components-styles/prefabs';
 import type { Metadata, Viewport } from 'next';
 import { Toaster } from 'react-hot-toast';
+import { Inter } from 'next/font/google';
+import { Providers } from './providers';
+
+const inter = Inter({ subsets: ['latin'] });
+
+const GOOGLE_MEET_ICON = 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg';
 
 export const metadata: Metadata = {
   title: {
-    default: 'LiveKit Meet | Conference app build with LiveKit open source',
+    default: 'Google Meet',
     template: '%s',
   },
   description:
-    'LiveKit is an open source WebRTC project that gives you everything needed to build scalable and real-time audio and/or video experiences in your applications.',
+    'Google Meet is a video conferencing platform that allows you to meet with your team, friends, and family.',
   twitter: {
-    creator: '@livekitted',
-    site: '@livekitted',
+    creator: '@googlemeet',
+    site: '@googlemeet',
     card: 'summary_large_image',
   },
   openGraph: {
-    url: 'https://meet.livekit.io',
+    url: 'https://meet.google.com',
     images: [
       {
-        url: 'https://meet.livekit.io/images/livekit-meet-open-graph.png',
-        width: 2000,
-        height: 1000,
-        type: 'image/png',
+        url: GOOGLE_MEET_ICON,
+        width: 124,
+        height: 40,
+        type: 'image/svg+xml',
       },
     ],
-    siteName: 'LiveKit Meet',
+    siteName: 'Google Meet',
   },
   icons: {
-    icon: {
-      rel: 'icon',
-      url: '/favicon.ico',
-    },
-    apple: [
-      {
-        rel: 'apple-touch-icon',
-        url: '/images/livekit-apple-touch.png',
-        sizes: '180x180',
-      },
-      { rel: 'mask-icon', url: '/images/livekit-safari-pinned-tab.svg', color: '#070707' },
-    ],
+    icon: GOOGLE_MEET_ICON,
+    apple: GOOGLE_MEET_ICON,
+    shortcut: GOOGLE_MEET_ICON,
   },
-};
+};  
 
 export const viewport: Viewport = {
   themeColor: '#070707',
@@ -50,10 +45,28 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body data-lk-theme="default">
+    <html lang="en" style={{ colorScheme: 'light' }}>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="icon"
+          href={GOOGLE_MEET_ICON}
+          type="image/svg+xml"
+          sizes="any"
+        />
+      </head>
+      <body data-lk-theme="default" className={inter.className}>
         <Toaster />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

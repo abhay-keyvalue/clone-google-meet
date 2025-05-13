@@ -1,0 +1,131 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 1000;
+}
+
+.menu {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 256px;
+  height: calc(100vh - 64px);
+  background-color: #f8f9fa;
+  z-index: 1001;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menuContent {
+  padding: 8px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+  height: 48px;
+  outline: none;
+  user-select: none;
+}
+
+.menuItemRipple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.menuItemFocusRing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+.menuItem:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.menuItem.active {
+  background-color: #e8f0fe;
+}
+
+.menuItem.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #1a73e8;
+}
+
+.menuIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  color: #5f6368;
+  flex-shrink: 0;
+}
+
+.menuTextContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.menuText {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 14px;
+  color: #202124;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-icons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #5f6368;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    top: 56px;
+    width: 100%;
+    height: calc(100vh - 56px);
+  }
+} 
