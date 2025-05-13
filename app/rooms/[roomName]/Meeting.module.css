@@ -1,0 +1,139 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: #202124;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.preJoinContainer {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background-color: #202124;
+}
+
+.meetingContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #202124;
+  position: relative;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.videoGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebar {
+  width: 320px;
+  background-color: #2d2e31;
+  border-left: 1px solid #3c4043;
+  display: flex;
+  flex-direction: column;
+}
+
+.participantsPanel,
+.chatPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.participantsPanel h3,
+.chatPanel h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e8eaed;
+}
+
+.participantsList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.controlBar {
+  height: 64px;
+  background-color: #2d2e31;
+  border-top: 1px solid #3c4043;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+/* Video participant styles */
+.videoGrid :global(.lk-participant-tile) {
+  background-color: #2d2e31;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.videoGrid :global(.lk-participant-name) {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Control bar button styles */
+.controlBar :global(.lk-button) {
+  background-color: transparent;
+  border: none;
+  color: #e8eaed;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.controlBar :global(.lk-button:hover) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.controlBar :global(.lk-button.active) {
+  color: #8ab4f8;
+}
+
+.controlBar :global(.lk-button.danger) {
+  color: #f28b82;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.visible {
+    transform: translateX(0);
+  }
+} 

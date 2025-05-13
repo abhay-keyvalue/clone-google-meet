@@ -11,6 +11,9 @@ import {
   PreJoin,
   RoomContext,
   VideoConference,
+  ControlBar,
+  useTracks,
+  useLocalParticipant,
 } from '@livekit/components-react';
 import {
   ExternalE2EEKeyProvider,
@@ -23,7 +26,8 @@ import {
   RoomEvent,
 } from 'livekit-client';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
+import styles from './Meeting.module.css';
 
 const CONN_DETAILS_ENDPOINT =
   process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/api/connection-details';
@@ -50,23 +54,48 @@ export function PageClientImpl(props: {
   );
 
   const handlePreJoinSubmit = React.useCallback(async (values: LocalUserChoices) => {
-    setPreJoinChoices(values);
-    const url = new URL(CONN_DETAILS_ENDPOINT, window.location.origin);
-    url.searchParams.append('roomName', props.roomName);
-    url.searchParams.append('participantName', values.username);
-    if (props.region) {
-      url.searchParams.append('region', props.region);
+    try {
+      setPreJoinChoices(values);
+      const url = new URL(CONN_DETAILS_ENDPOINT, window.location.origin);
+      url.searchParams.append('roomName', props.roomName);
+      url.searchParams.append('participantName', values.username);
+      if (props.region) {
+        url.searchParams.append('region', props.region);
+      }
+      const connectionDetailsResp = await fetch(url.toString());
+      
+      if (!connectionDetailsResp.ok) {
+        throw new Error(`Failed to get connection details: ${connectionDetailsResp.statusText}`);
+      }
+
+      const contentType = connectionDetailsResp.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Invalid response format: Expected JSON');
+      }
+
+      const connectionDetailsData = await connectionDetailsResp.json();
+      
+      if (!connectionDetailsData || 
+          typeof connectionDetailsData.serverUrl !== 'string' ||
+          typeof connectionDetailsData.roomName !== 'string' ||
+          typeof connectionDetailsData.participantToken !== 'string' ||
+          typeof connectionDetailsData.participantName !== 'string') {
+        throw new Error('Invalid connection details format');
+      }
+
+      setConnectionDetails(connectionDetailsData);
+    } catch (error) {
+      console.error('Error getting connection details:', error);
+      alert(`Failed to get connection details: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-    const connectionDetailsResp = await fetch(url.toString());
-    const connectionDetailsData = await connectionDetailsResp.json();
-    setConnectionDetails(connectionDetailsData);
-  }, []);
+  }, [props.roomName, props.region]);
+
   const handlePreJoinError = React.useCallback((e: any) => console.error(e), []);
 
   return (
-    <main data-lk-theme="default" style={{ height: '100%' }}>
+    <main className={styles.container}>
       {connectionDetails === undefined || preJoinChoices === undefined ? (
-        <div style={{ display: 'grid', placeItems: 'center', height: '100%' }}>
+        <div className={styles.preJoinContainer}>
           <PreJoin
             defaults={preJoinDefaults}
             onSubmit={handlePreJoinSubmit}
@@ -81,6 +110,63 @@ export function PageClientImpl(props: {
         />
       )}
     </main>
+  );
+}
+
+function VideoConferenceContent() {
+  const tracks = useTracks();
+  const { localParticipant } = useLocalParticipant();
+  const room = React.useContext(RoomContext);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showParticipants, setShowParticipants] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+
+  return (
+    <VideoConference
+      chatMessageFormatter={formatChatMessageLinks}
+      SettingsComponent={SHOW_SETTINGS_MENU ? SettingsMenu : undefined}
+    >
+      <div className={`${styles.meetingContainer} ${isFullscreen ? styles.fullscreen : ''}`}>
+        <div className={styles.mainContent}>
+          <div className={styles.videoGrid}>
+            {/* Video tiles will be rendered here by VideoConference */}
+          </div>
+          
+          <div className={styles.sidebar}>
+            {showParticipants && (
+              <div className={styles.participantsPanel}>
+                <h3>Participants</h3>
+                <div className={styles.participantsList}>
+                  {room?.numParticipants} participants
+                </div>
+              </div>
+            )}
+            
+            {showChat && (
+              <div className={styles.chatPanel}>
+                <h3>Chat</h3>
+                {/* Chat component will be added here */}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.controlBar}>
+          <ControlBar
+            controls={{
+              camera: true,
+              microphone: true,
+              screenShare: true,
+              leave: true,
+              chat: true,
+            }}
+          />
+        </div>
+
+        <DebugMode />
+        <RecordingIndicator />
+      </div>
+    </VideoConference>
   );
 }
 
@@ -211,15 +297,8 @@ function VideoConferenceComponent(props: {
   }, []);
 
   return (
-    <div className="lk-room-container">
-      <RoomContext.Provider value={room}>
-        <VideoConference
-          chatMessageFormatter={formatChatMessageLinks}
-          SettingsComponent={SHOW_SETTINGS_MENU ? SettingsMenu : undefined}
-        />
-        <DebugMode />
-        <RecordingIndicator />
-      </RoomContext.Provider>
-    </div>
+    <RoomContext.Provider value={room}>
+      <VideoConferenceContent />
+    </RoomContext.Provider>
   );
 }

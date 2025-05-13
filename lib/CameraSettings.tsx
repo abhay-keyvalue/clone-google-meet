@@ -7,13 +7,17 @@ import {
 } from '@livekit/components-react';
 import { BackgroundBlur, VirtualBackground } from '@livekit/track-processors';
 import { isLocalTrack, LocalTrackPublication, Track } from 'livekit-client';
-import Desk from '../public/background-images/samantha-gades-BlIhVfXbi9s-unsplash.jpg';
-import Nature from '../public/background-images/ali-kazal-tbw_KQE3Cbg-unsplash.jpg';
 
 // Background image paths
 const BACKGROUND_IMAGES = [
-  { name: 'Desk', path: Desk },
-  { name: 'Nature', path: Nature },
+  { 
+    name: 'Desk', 
+    path: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=60'
+  },
+  { 
+    name: 'Nature', 
+    path: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&auto=format&fit=crop&q=60'
+  },
 ];
 
 // Background options
@@ -21,6 +25,7 @@ type BackgroundType = 'none' | 'blur' | 'image';
 
 export function CameraSettings() {
   const { cameraTrack, localParticipant } = useLocalParticipant();
+  const [mediaError, setMediaError] = React.useState<string | null>(null);
   const [backgroundType, setBackgroundType] = React.useState<BackgroundType>(
     (cameraTrack as LocalTrackPublication)?.track?.getProcessor()?.name === 'background-blur'
       ? 'blur'
@@ -47,6 +52,12 @@ export function CameraSettings() {
   };
 
   React.useEffect(() => {
+    // Check if mediaDevices is available
+    if (!navigator.mediaDevices) {
+      setMediaError('Media devices are not available. Please ensure you are using a secure context (HTTPS) and have granted camera/microphone permissions.');
+      return;
+    }
+
     if (isLocalTrack(cameraTrack?.track)) {
       if (backgroundType === 'blur') {
         cameraTrack.track?.setProcessor(BackgroundBlur());
@@ -57,6 +68,28 @@ export function CameraSettings() {
       }
     }
   }, [cameraTrack, backgroundType, virtualBackgroundImagePath]);
+
+  if (mediaError) {
+    return (
+      <div style={{ 
+        padding: '20px', 
+        backgroundColor: '#fff3f3', 
+        border: '1px solid #ffcdd2',
+        borderRadius: '4px',
+        color: '#d32f2f'
+      }}>
+        <h3>Camera Access Error</h3>
+        <p>{mediaError}</p>
+        <p>Please try the following:</p>
+        <ul>
+          <li>Ensure you're using a secure connection (HTTPS)</li>
+          <li>Check if your browser supports media devices</li>
+          <li>Grant camera and microphone permissions</li>
+          <li>Try using a different browser</li>
+        </ul>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -133,20 +166,20 @@ export function CameraSettings() {
 
           {BACKGROUND_IMAGES.map((image) => (
             <button
-              key={image.path.src}
-              onClick={() => selectBackground('image', image.path.src)}
+              key={image.path}
+              onClick={() => selectBackground('image', image.path)}
               className="lk-button"
               aria-pressed={
-                backgroundType === 'image' && virtualBackgroundImagePath === image.path.src
+                backgroundType === 'image' && virtualBackgroundImagePath === image.path
               }
               style={{
-                backgroundImage: `url(${image.path.src})`,
+                backgroundImage: `url(${image.path})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 width: '80px',
                 height: '60px',
                 border:
-                  backgroundType === 'image' && virtualBackgroundImagePath === image.path.src
+                  backgroundType === 'image' && virtualBackgroundImagePath === image.path
                     ? '2px solid #0090ff'
                     : '1px solid #d1d1d1',
               }}
