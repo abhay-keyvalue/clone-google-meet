@@ -22,12 +22,11 @@
 
 .lk-video-preview-container {
   position: relative;
-  width: 640px;
-  height: 360px;
+  width: 800px;
+  height: 480px;
   background: #222;
-  border-radius: 24px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.12);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -153,7 +152,7 @@
 }
 .lk-room-name {
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 400 !important;
   color: #222;
   margin-bottom: 30px;
   font-family: 'Google Sans', 'Roboto', sans-serif !important;
@@ -178,8 +177,8 @@
 .lk-join-button {
   background: #1967d2;
   color: #fff;
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 16px !important;
+  font-weight: 400 !important;
   border: none;
   border-radius: 2em;
   padding: 1em 0;

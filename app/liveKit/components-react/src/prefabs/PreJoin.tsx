@@ -448,9 +448,10 @@ export function PreJoin({
           {videoTrack && videoEnabled ? (
             <video
               ref={videoEl}
-              width="1280"
-              height="720"
+              width="800"
+              height="480"
               data-lk-facing-mode={facingMode}
+              style={{borderRadius: '10px'}}
               className="lk-video-preview"
               autoPlay
               playsInline
@@ -474,9 +475,9 @@ export function PreJoin({
           </div>
         </div>
         {/* Device selection dropdowns */}
-        <div className="lk-device-selection-row" style={{display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', marginTop: '-10px', width: '100%'}}>
+        {/* <div className="lk-device-selection-row" style={{display: 'flex', justifyContent: 'flex-start', flexDirection: 'row', marginTop: '-10px', width: '100%'}}>
           <MediaDeviceMenu 
-            style={{width: '60px', backgroundColor: 'rgba(0,0,0,0.1)', border: '0px solid #FFF'}}
+            style={{width: '60px', height: '30px', backgroundColor: 'rgba(0,0,0,0.1)', border: '0px solid #FFF'}}
             initialSelection={audioDeviceId}
             kind="audioinput"
             disabled={!audioTrack}
@@ -484,14 +485,14 @@ export function PreJoin({
             onActiveDeviceChange={(_, id) => setAudioDeviceId(id)}
           />
           <MediaDeviceMenu
-            style={{width: '60px', backgroundColor: 'rgba(0,0,0,0.1)', border: '0px solid #FFF'}}
+            style={{width: '60px', height: '30px', backgroundColor: 'rgba(0,0,0,0.1)', border: '0px solid #FFF'}}
             initialSelection={videoDeviceId}
             kind="videoinput"
             disabled={!videoTrack}
             tracks={{ videoinput: videoTrack }}
             onActiveDeviceChange={(_, id) => setVideoDeviceId(id)}
           />
-        </div>
+        </div> */}
       </div>
       {/* Right: Join Section */}
       <div className="lk-prejoin-right">
