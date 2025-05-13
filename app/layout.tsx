@@ -10,6 +10,8 @@ const GOOGLE_MEET_ICON = 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Go
 
 const gMeetIconUrl = 'https://sm.mashable.com/mashable_in/help/h/how-to-sha/how-to-share-your-screen-on-google-meet_aduq.png';
 
+const gMeetIconUrl = 'https://sm.mashable.com/mashable_in/help/h/how-to-sha/how-to-share-your-screen-on-google-meet_aduq.png';
+
 export const metadata: Metadata = {
   title: {
     default: 'Google Meet',

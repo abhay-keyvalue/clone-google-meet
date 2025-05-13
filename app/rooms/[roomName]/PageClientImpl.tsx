@@ -10,7 +10,6 @@ import {
   LocalUserChoices,
   RoomContext,
   VideoConference,
-  PreJoin,
   ControlBar,
   useTracks,
   useLocalParticipant,
