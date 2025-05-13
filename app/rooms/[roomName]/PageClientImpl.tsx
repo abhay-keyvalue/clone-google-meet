@@ -8,15 +8,20 @@ import { ConnectionDetails } from '@/lib/types';
 import {
   formatChatMessageLinks,
   LocalUserChoices,
-  RoomContext,
-  VideoConference,
   ControlBar,
+  // VideoConference,
   useTracks,
   useLocalParticipant,
 } from '@/app/liveKit/components-react';
+
+import { RoomContext } from '../../liveKit/components-react/src/context/room-context';
+
 import {
   PreJoin,
 } from '../../liveKit/components-react/src/prefabs/PreJoin';
+import {
+  VideoConference,
+} from '../../liveKit/components-react/src/prefabs/VideoConference';
 import {
   ExternalE2EEKeyProvider,
   RoomOptions,
@@ -126,6 +131,7 @@ function VideoConferenceContent() {
   const [showChat, setShowChat] = useState(false);
 
   return (
+    <div style={{backgroundColor: 'red', padding: '10px', width: '500px', height: '400px'}}>
     <VideoConference
       chatMessageFormatter={formatChatMessageLinks}
       SettingsComponent={SHOW_SETTINGS_MENU ? SettingsMenu : undefined}
@@ -166,11 +172,9 @@ function VideoConferenceContent() {
             }}
           />
         </div>
-
-        <DebugMode />
-        <RecordingIndicator />
       </div>
     </VideoConference>
+    </div>
   );
 }
 
@@ -302,7 +306,14 @@ function VideoConferenceComponent(props: {
 
   return (
     <RoomContext.Provider value={room}>
-      <VideoConferenceContent />
+      <div className="lk-room-container">
+        <VideoConference
+          chatMessageFormatter={formatChatMessageLinks}
+          SettingsComponent={SHOW_SETTINGS_MENU ? SettingsMenu : undefined}
+        />
+        <DebugMode />
+        <RecordingIndicator />
+      </div>
     </RoomContext.Provider>
   );
 }

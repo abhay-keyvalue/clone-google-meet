@@ -133,11 +133,13 @@ export const ParticipantTile: (
     );
 
     return (
-      <div ref={ref} style={{ position: 'relative' }} {...elementProps}>
+      <div ref={ref} style={{ position: 'relative' , display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}} {...elementProps}>
         <TrackRefContextIfNeeded trackRef={trackReference}>
           <ParticipantContextIfNeeded participant={trackReference.participant}>
+
             {children ?? (
-              <>
+              <div style={{position: 'relative', backgroundColor: 'purple', width: '100%', height: '100%'}}>
+                <div style={{position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', zIndex: '100'}}>
                 {isTrackReference(trackReference) &&
                 (trackReference.publication?.kind === 'video' ||
                   trackReference.source === Track.Source.Camera ||
@@ -155,6 +157,7 @@ export const ParticipantTile: (
                     />
                   )
                 )}
+                </div>
                 <div className="lk-participant-placeholder">
                   <ParticipantPlaceholder />
                 </div>
@@ -181,7 +184,7 @@ export const ParticipantTile: (
                   </div>
                   <ConnectionQualityIndicator className="lk-participant-metadata-item" />
                 </div>
-              </>
+              </div>
             )}
             <FocusToggle trackRef={trackReference} />
           </ParticipantContextIfNeeded>

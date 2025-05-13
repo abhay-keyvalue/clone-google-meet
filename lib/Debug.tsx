@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRoomContext } from '@livekit/components-react';
+import { useRoomContext } from '../app/liveKit/components-react/src/context/room-context';
 import { setLogLevel, LogLevel, RemoteTrackPublication, setLogExtension } from 'livekit-client';
 // @ts-ignore
 import { tinykeys } from 'tinykeys';
