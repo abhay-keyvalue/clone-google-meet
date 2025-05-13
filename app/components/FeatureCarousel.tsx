@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/FeatureCarousel.module.css';
 import SlideSwitch from './FeatureCarousel/SlideSwitch';
 
@@ -32,23 +32,6 @@ const features: Feature[] = [
 
 export default function FeatureCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    
-    interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === features.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000); // Change slide every 5 seconds
-
-
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, []);
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => 
@@ -134,11 +117,6 @@ export default function FeatureCarousel() {
             />
           ))}
         </div>
-        <SlideSwitch
-          isOn={true}
-          onChange={() => {}}
-          label="Auto-play"
-        />
       </div>
     </div>
   );

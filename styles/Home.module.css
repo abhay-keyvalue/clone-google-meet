@@ -46,6 +46,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 .logoImage {
