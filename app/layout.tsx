@@ -8,6 +8,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 const GOOGLE_MEET_ICON = 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg';
 
+const gMeetIconUrl = 'https://sm.mashable.com/mashable_in/help/h/how-to-sha/how-to-share-your-screen-on-google-meet_aduq.png';
+
 export const metadata: Metadata = {
   title: {
     default: 'Google Meet',
