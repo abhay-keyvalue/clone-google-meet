@@ -13,6 +13,7 @@ const ASPECT_RATIO_INVERT = (1 - ASPECT_RATIO) * -1;
 
 /** @public */
 export interface CarouselLayoutProps extends React.HTMLAttributes<HTMLMediaElement> {
+  focusTrack?: any;
   tracks: TrackReferenceOrPlaceholder[];
   children: React.ReactNode;
   /** Place the tiles vertically or horizontally next to each other.
@@ -35,7 +36,7 @@ export interface CarouselLayoutProps extends React.HTMLAttributes<HTMLMediaEleme
  * ```
  * @public
  */
-export function CarouselLayout({ tracks, orientation, ...props }: CarouselLayoutProps) {
+export function CarouselLayout({ focusTrack, tracks, orientation, ...props }: CarouselLayoutProps) {
   const asideEl = React.useRef<HTMLDivElement>(null);
   const [prevTiles, setPrevTiles] = React.useState(0);
   const { width, height } = useSize(asideEl);
@@ -73,8 +74,8 @@ export function CarouselLayout({ tracks, orientation, ...props }: CarouselLayout
   }, [maxVisibleTiles, carouselOrientation]);
 
   return (
-    <aside key={carouselOrientation} className="lk-carousel" ref={asideEl} style={{ width: '100%', height: '100%'}} {...props}>
-      <TrackLoop tracks={sortedTiles}>{props.children}</TrackLoop>
+    <aside key={carouselOrientation} className="lk-carousel" ref={asideEl} style={{ width: focusTrack? '40%' : '100%', height: '100%'}} {...props}>
+      <TrackLoop focusTrack={focusTrack} tracks={sortedTiles}>{props.children}</TrackLoop>
     </aside>
   );
 }

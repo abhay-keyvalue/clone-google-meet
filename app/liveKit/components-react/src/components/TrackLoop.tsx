@@ -6,6 +6,7 @@ import { getTrackReferenceId } from '@livekit/components-core';
 
 /** @public */
 export interface TrackLoopProps {
+  focusTrack?: any;
   /** Track references to loop over. You can the use `useTracks()` hook to get TrackReferences. */
   tracks: TrackReference[] | TrackReferenceOrPlaceholder[];
   /** The template component to be used in the loop. */
@@ -27,19 +28,28 @@ export interface TrackLoopProps {
  * ```
  * @public
  */
-export function TrackLoop({ tracks, ...props }: TrackLoopProps) {
+export function TrackLoop({ tracks, focusTrack, ...props }: TrackLoopProps) {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: focusTrack? 'column' :'row', height: '100%', gap: '15px' }}>
       {tracks.map((trackReference) => {
         return (
-          <TrackRefContext.Provider
-            value={trackReference}
-            key={getTrackReferenceId(trackReference)}
+          <div
+            style={{
+              width: focusTrack? '100%' : `${100 / tracks.length}%`,
+              height: '100%',
+              borderRadius: '10px',
+              overflow: 'hidden',
+            }}
           >
-            {cloneSingleChild(props.children)}
-          </TrackRefContext.Provider>
+            <TrackRefContext.Provider
+              value={trackReference}
+              key={getTrackReferenceId(trackReference)}
+            >
+              {cloneSingleChild(props.children)}
+            </TrackRefContext.Provider>
+          </div>
         );
       })}
-    </>
+    </div>
   );
 }

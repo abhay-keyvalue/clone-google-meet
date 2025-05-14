@@ -131,12 +131,12 @@ export function VideoConference({
   useWarnAboutMissingStyles();
 
   const renderVideoConference = () => {
+    console.log('tracks', tracks);
+    console.log('focusTrack', focusTrack);
+    console.log('carouselTracks', carouselTracks);
     if (!focusTrack) {
       return (
-        <div
-          className="lk-grid-layout-wrapper"
-          style={{width: '100%', height: '100%'}}
-        >
+        <div className="lk-grid-layout-wrapper" style={{ width: '100%', height: '100%' }}>
           <GridLayout tracks={tracks}>
             <ParticipantTile />
             {/* TO DO: Add a grid layout for the participants */}
@@ -145,12 +145,20 @@ export function VideoConference({
       );
     } else {
       return (
-        <div className="lk-focus-layout-wrapper" style={{ padding: '0px'}}>
-          <FocusLayoutContainer style={{display: 'flex', flexDirection: 'row', gap: '10px', width: '100%', height: '100%'}}>
-            <CarouselLayout tracks={carouselTracks}>
+        <div className="lk-focus-layout-wrapper" style={{ padding: '0px' }}>
+          <FocusLayoutContainer
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '40px',
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            {focusTrack && <FocusLayout trackRef={focusTrack} />}
+            <CarouselLayout focusTrack={focusTrack} tracks={carouselTracks}>
               <ParticipantTile />
             </CarouselLayout>
-            {focusTrack && <FocusLayout trackRef={focusTrack} />}
           </FocusLayoutContainer>
         </div>
       );
@@ -180,11 +188,7 @@ export function VideoConference({
   };
 
   return (
-    <div
-      className="lk-video-conference"
-      style={{ width: '100%', height: '100vh' }}
-      {...props}
-    >
+    <div className="lk-video-conference" style={{ width: '100%', height: '100vh' }} {...props}>
       {isWeb() && (
         <LayoutContextProvider
           value={layoutContext}
@@ -201,6 +205,7 @@ export function VideoConference({
               width: '100%',
               height: '100%',
               backgroundColor: '#181818',
+              padding: '10px',
             }}
           >
             {renderVideoConference()}

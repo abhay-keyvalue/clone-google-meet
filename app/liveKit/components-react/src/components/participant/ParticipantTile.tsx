@@ -139,10 +139,11 @@ export const ParticipantTile: (
         <div
           style={{
             position: 'absolute',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
+            marginTop: '-20px',
+            top: '-20px',
+            left: '-20px',
+            width: '130%',
+            height: '120%',
             zIndex: '100',
           }}
         >
@@ -164,11 +165,6 @@ export const ParticipantTile: (
       );
     };
 
-    const renderPlaceholderImage = () => {
-      return (
-        <ParticipantPlaceholder />
-      )};
-
     const renderPlaceholder = () => {
       return (
         <div
@@ -182,7 +178,6 @@ export const ParticipantTile: (
           }}
         >
           {renderVideo()}
-          {renderPlaceholderImage()}
           {/* {isCameraEnabled ? renderVideo() : <ParticipantPlaceholder />} */}
           {renderVideoControls()}
         </div>
@@ -247,6 +242,9 @@ export const ParticipantTile: (
           alignItems: 'center',
           width: '100%',
           height: '100%',
+          padding: '10px',
+          overflow: 'hidden',
+          borderRadius: '10px',
         }}
         {...elementProps}
       >
