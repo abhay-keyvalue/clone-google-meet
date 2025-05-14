@@ -139,11 +139,12 @@ export const ParticipantTile: (
         <div
           style={{
             position: 'absolute',
-            marginTop: '-20px',
-            top: '-20px',
-            left: '-20px',
-            width: '130%',
-            height: '120%',
+            top: '0px',
+            left: '-5%',
+            bottom: '0px',
+            right: '0px',
+            width: '110%',
+            height: '100%',
             zIndex: '100',
           }}
         >
@@ -195,10 +196,6 @@ export const ParticipantTile: (
             left: '0',
             padding: '10px',
             zIndex: '101',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            borderRadius: '10px',
-            backdropFilter: 'blur(10px)',
-            margin: '10px',
           }}
           className="lk-participant-metadata"
         >
@@ -223,7 +220,7 @@ export const ParticipantTile: (
             ) : (
               <>
                 <ParticipantName>&apos;s screen</ParticipantName>
-                <ScreenShareIcon style={{ marginRight: '0.25rem' }} />
+                <ScreenShareIcon style={{ marginRight: '0.25rem', color: 'white' }} />
               </>
             )}
           </div>
@@ -245,6 +242,7 @@ export const ParticipantTile: (
           padding: '10px',
           overflow: 'hidden',
           borderRadius: '10px',
+          background: 'rgba(0, 0, 0, 0.3)',
         }}
         {...elementProps}
       >
@@ -257,3 +255,16 @@ export const ParticipantTile: (
     );
   },
 );
+
+function generateBackgroundColor() {
+  // Array of gradient backgrounds inspired by the sample UIs
+  const gradients = [
+    'radial-gradient(circle at 60% 40%, #4b5c77 0%, #1a2636 100%)', // blue/gray
+    'radial-gradient(circle at 60% 40%, #8e44ad 0%, #3d0c4c 100%)', // purple
+    'radial-gradient(circle at 60% 40%, #6a11cb 0%, #2575fc 100%)', // blue/purple
+    'radial-gradient(circle at 60% 40%, #ff6a00 0%, #ee0979 100%)', // orange/pink
+    'radial-gradient(circle at 60% 40%, #43cea2 0%, #185a9d 100%)', // teal/blue
+  ];
+  // Pick a random gradient
+  return gradients[Math.floor(Math.random() * gradients.length)];
+}

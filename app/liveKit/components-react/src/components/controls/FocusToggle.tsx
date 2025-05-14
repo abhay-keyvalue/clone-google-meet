@@ -41,9 +41,9 @@ export const FocusToggle: (
               {props.children ? (
                 props.children
               ) : inFocus ? (
-                <UnfocusToggleIcon />
+                <UnfocusToggleIcon style={{ color: 'white' }} />
               ) : (
-                <FocusToggleIcon />
+                <FocusToggleIcon style={{ color: 'white' }} />
               )}
             </button>
           )

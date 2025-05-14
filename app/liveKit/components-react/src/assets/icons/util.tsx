@@ -20,7 +20,7 @@ import {
 export function getSourceIcon(source: Track.Source, enabled: boolean) {
   switch (source) {
     case Track.Source.Microphone:
-      return enabled ? <MicIcon /> : <MicDisabledIcon />;
+      return enabled ? <MicIcon style={{ color: 'white' }} /> : <MicDisabledIcon style={{ color: 'white' }} />;
     case Track.Source.Camera:
       return enabled ? <CameraIcon /> : <CameraDisabledIcon />;
     case Track.Source.ScreenShare:
@@ -36,12 +36,12 @@ export function getSourceIcon(source: Track.Source, enabled: boolean) {
 export function getConnectionQualityIcon(quality: ConnectionQuality) {
   switch (quality) {
     case ConnectionQuality.Excellent:
-      return <QualityExcellentIcon />;
+      return <QualityExcellentIcon style={{ color: 'white' }} />;
     case ConnectionQuality.Good:
-      return <QualityGoodIcon />;
+      return <QualityGoodIcon style={{ color: 'white' }} />;
     case ConnectionQuality.Poor:
-      return <QualityPoorIcon />;
+      return <QualityPoorIcon style={{ color: 'red' }} />;
     default:
-      return <QualityUnknownIcon />;
+      return <QualityUnknownIcon style={{ color: 'white' }} />;
   }
 }

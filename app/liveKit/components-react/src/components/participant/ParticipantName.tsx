@@ -41,7 +41,7 @@ export const ParticipantName: (
     }, [props, className, name]);
 
     return (
-      <span ref={ref} {...mergedProps}>
+      <span ref={ref} {...mergedProps} style={{ color: 'white' }}>
         {name !== '' ? name : identity}
         {props.children}
       </span>

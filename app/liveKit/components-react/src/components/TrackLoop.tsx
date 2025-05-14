@@ -30,12 +30,20 @@ export interface TrackLoopProps {
  */
 export function TrackLoop({ tracks, focusTrack, ...props }: TrackLoopProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: focusTrack? 'column' :'row', height: '100%', gap: '15px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: focusTrack ? 'column' : 'row',
+        height: (focusTrack || tracks.length <3) ? '100%' : '70%',
+        gap: '15px',
+        marginTop: (focusTrack || tracks.length <3) ? 0:'10%',
+      }}
+    >
       {tracks.map((trackReference) => {
         return (
           <div
             style={{
-              width: focusTrack? '100%' : `${100 / tracks.length}%`,
+              width: focusTrack ? '100%' : `${100 / tracks.length}%`,
               height: '100%',
               borderRadius: '10px',
               overflow: 'hidden',

@@ -150,7 +150,7 @@ export function VideoConference({
             style={{
               display: 'flex',
               flexDirection: 'row',
-              gap: '40px',
+              gap: '20px',
               width: '100%',
               height: '100%',
             }}
