@@ -24,14 +24,14 @@ export function ConnectionStateToast(props: ConnectionStateToastProps) {
       case ConnectionState.Reconnecting:
         setNotification(
           <>
-            <SpinnerIcon className="lk-spinner" /> Reconnecting
+            <SpinnerIcon className="lk-spinner" style={{marginRight: '10px'}} /> Reconnecting...
           </>,
         );
         break;
       case ConnectionState.Connecting:
         setNotification(
           <>
-            <SpinnerIcon className="lk-spinner" /> Connecting
+            <SpinnerIcon className="lk-spinner" style={{marginRight: '10px'}} /> Connecting to meeting...
           </>,
         );
         break;
@@ -43,5 +43,29 @@ export function ConnectionStateToast(props: ConnectionStateToastProps) {
         break;
     }
   }, [state]);
-  return notification ? <Toast className="lk-toast-connection-state">{notification}</Toast> : <></>;
+  return notification ? (
+    <Toast
+      style={{
+        backgroundColor: '#181818',
+        color: '#FFF',
+        fontSize: '22px',
+        zIndex: 1000,
+        width: '100%',
+        height: '100%',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      className="lk-toast-connection-state"
+    >
+      {notification}
+    </Toast>
+  ) : (
+    <></>
+  );
 }
