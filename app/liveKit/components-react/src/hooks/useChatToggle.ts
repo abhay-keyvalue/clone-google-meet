@@ -23,7 +23,10 @@ export function useChatToggle({ props }: UseChatToggleProps) {
     return mergeProps(props, {
       className,
       onClick: () => {
-        if (dispatch) dispatch({ msg: 'toggle_chat' });
+        if (dispatch) {
+          console.log('Toggling chat, current state:', state?.showChat);
+          dispatch({ msg: 'toggle_chat' });
+        }
       },
       'aria-pressed': state?.showChat ? 'true' : 'false',
       'data-lk-unread-msgs': state

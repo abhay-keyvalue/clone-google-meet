@@ -4,7 +4,7 @@ import * as React from 'react';
 import { MediaDeviceMenu } from './MediaDeviceMenu';
 import { DisconnectButton } from '../components/controls/DisconnectButton';
 import { TrackToggle } from '../components/controls/TrackToggle';
-import { ChatIcon, GearIcon, LeaveIcon } from '../assets/icons';
+import { ChatIcon, GearIcon, LeaveIcon, CaptionIcon, RaiseHandIcon, MoreOptionsIcon } from '../assets/icons';
 import { ChatToggle } from '../components/controls/ChatToggle';
 import { useLocalParticipantPermissions, usePersistentUserChoices } from '../hooks';
 import { useMediaQuery } from '../hooks/internal';
@@ -13,6 +13,12 @@ import { supportsScreenSharing } from '@livekit/components-core';
 import { mergeProps } from '../utils';
 import { StartMediaButton } from '../components/controls/StartMediaButton';
 import { SettingsMenuToggle } from '../components/controls/SettingsMenuToggle';
+import { EmojiButton } from '../components/controls/EmojiButton';
+import { CaptionButton } from '../components/controls/CaptionButton';
+import { RaiseHandButton } from '../components/controls/RaiseHandButton';
+import { MoreOptionsButton } from '../components/controls/MoreOptionsButton';
+import { Chat } from './Chat';
+
 
 /** @public */
 export type ControlBarControls = {
@@ -22,6 +28,9 @@ export type ControlBarControls = {
   screenShare?: boolean;
   leave?: boolean;
   settings?: boolean;
+  caption?: boolean;
+  raiseHand?: boolean;
+  moreOptions?: boolean;
 };
 
 /** @public */
@@ -62,6 +71,8 @@ export function ControlBar({
   ...props
 }: ControlBarProps) {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
+  const [currentTime, setCurrentTime] = React.useState('');
+  const [meetingCode, setMeetingCode] = React.useState('');
   const layoutContext = useMaybeLayoutContext();
   React.useEffect(() => {
     if (layoutContext?.widget.state?.showChat !== undefined) {
@@ -73,7 +84,14 @@ export function ControlBar({
   const defaultVariation = isTooLittleSpace ? 'minimal' : 'verbose';
   variation ??= defaultVariation;
 
-  const visibleControls = { leave: true, ...controls };
+  const visibleControls = { 
+    leave: true, 
+    emoji: true, 
+    caption: true,
+    raiseHand: true,
+    moreOptions: true,
+    ...controls 
+  };
 
   const localPermissions = useLocalParticipantPermissions();
 
@@ -130,12 +148,34 @@ export function ControlBar({
     [saveVideoInputEnabled],
   );
 
+  // Update time every minute
+  React.useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString('en-US', { 
+        hour: 'numeric', 
+        minute: '2-digit',
+        hour12: true 
+      }));
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Get meeting code from URL
+  React.useEffect(() => {
+    const code = window.location.pathname.split('/').pop() || '';
+    setMeetingCode(code);
+  }, []);
+
   return (
     <div className="lk-controlbar-root">
       <div className="lk-controlbar-info">
-        <span className="lk-controlbar-time">1:19 AM</span>
+        <span className="lk-controlbar-time">{currentTime}</span>
         <span className="lk-controlbar-divider">|</span>
-        <span className="lk-controlbar-code">tcg-ujwz-pgq</span>
+        <span className="lk-controlbar-code">{meetingCode}</span>
       </div>
       <div className="lk-controlbar-center">
         {visibleControls.microphone && (
@@ -158,6 +198,15 @@ export function ControlBar({
             />
           </div>
         )}
+        {visibleControls.emoji && (
+          <EmojiButton showIcon={showIcon} />
+        )}
+        {visibleControls.caption && (
+          <CaptionButton showIcon={showIcon} />
+        )}
+        {visibleControls.raiseHand && (
+          <RaiseHandButton showIcon={showIcon} />
+        )}
         {visibleControls.screenShare && browserSupportsScreenSharing && (
           <TrackToggle
             source={Track.Source.ScreenShare}
@@ -167,15 +216,13 @@ export function ControlBar({
             onDeviceError={(error) => onDeviceError?.({ source: Track.Source.ScreenShare, error })}
           />
         )}
-        {visibleControls.chat && (
-          <ChatToggle>
-            {showIcon && <ChatIcon />}
-          </ChatToggle>
-        )}
         {visibleControls.settings && (
           <SettingsMenuToggle>
             {showIcon && <GearIcon />}
           </SettingsMenuToggle>
+        )}
+        {visibleControls.moreOptions && (
+          <MoreOptionsButton showIcon={showIcon} />
         )}
         {visibleControls.leave && (
           <DisconnectButton>
@@ -185,14 +232,19 @@ export function ControlBar({
         <StartMediaButton />
       </div>
       <div className="lk-controlbar-actions">
-        <span className="lk-controlbar-action-icon info" />
-        <span className="lk-controlbar-action-icon people">
-          <span className="lk-controlbar-badge">1</span>
-        </span>
-        <span className="lk-controlbar-action-icon chat" />
-        <span className="lk-controlbar-action-icon apps" />
-        <span className="lk-controlbar-action-icon lock" />
+        {visibleControls.chat && (
+          <ChatToggle className="lk-controlbar-action-icon">
+            <span className="material-icons">chat</span>
+          </ChatToggle>
+        )}
+        <button className="lk-controlbar-action-icon tools">
+          <span className="material-icons">apps</span>
+        </button>
+        <button className="lk-controlbar-action-icon host">
+          <span className="material-icons">admin_panel_settings</span>
+        </button>
       </div>
+      <Chat className={isChatOpen ? 'show' : ''} />
     </div>
   );
 }

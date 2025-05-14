@@ -100,53 +100,52 @@ export function Chat({
   return (
     <div {...props} className="lk-chat">
       <div className="lk-chat-header">
-        Messages
+        <div className="lk-chat-header-title">
+          <span className="material-icons">chat</span>
+          <span>In-call messages</span>
+        </div>
         {layoutContext && (
           <ChatToggle className="lk-close-button">
-            <ChatCloseIcon />
+            <span className="material-icons">close</span>
           </ChatToggle>
         )}
       </div>
 
-      <ul className="lk-list lk-chat-messages" ref={ulRef}>
-        {props.children
-          ? chatMessages.map((msg, idx) =>
-              cloneSingleChild(props.children, {
-                entry: msg,
-                key: msg.id ?? idx,
-                messageFormatter,
-              }),
-            )
-          : chatMessages.map((msg, idx, allMsg) => {
-              const hideName = idx >= 1 && allMsg[idx - 1].from === msg.from;
-              // If the time delta between two messages is bigger than 60s show timestamp.
-              const hideTimestamp = idx >= 1 && msg.timestamp - allMsg[idx - 1].timestamp < 60_000;
+      <div className="lk-chat-messages-container">
+        <ul className="lk-list lk-chat-messages" ref={ulRef}>
+          {chatMessages.map((msg, idx, allMsg) => {
+            const hideName = idx >= 1 && allMsg[idx - 1].from === msg.from;
+            const hideTimestamp = idx >= 1 && msg.timestamp - allMsg[idx - 1].timestamp < 60_000;
 
-              return (
-                <ChatEntry
-                  key={msg.id ?? idx}
-                  hideName={hideName}
-                  hideTimestamp={hideName === false ? false : hideTimestamp} // If we show the name always show the timestamp as well.
-                  entry={msg}
-                  messageFormatter={messageFormatter}
-                />
-              );
-            })}
-      </ul>
+            return (
+              <ChatEntry
+                key={msg.id ?? idx}
+                hideName={hideName}
+                hideTimestamp={hideName === false ? false : hideTimestamp}
+                entry={msg}
+                messageFormatter={messageFormatter}
+              />
+            );
+          })}
+        </ul>
+      </div>
+
       <form className="lk-chat-form" onSubmit={handleSubmit}>
-        <input
-          className="lk-form-control lk-chat-form-input"
-          disabled={isSending}
-          ref={inputRef}
-          type="text"
-          placeholder="Enter a message..."
-          onInput={(ev) => ev.stopPropagation()}
-          onKeyDown={(ev) => ev.stopPropagation()}
-          onKeyUp={(ev) => ev.stopPropagation()}
-        />
-        <button type="submit" className="lk-button lk-chat-form-button" disabled={isSending}>
-          Send
-        </button>
+        <div className="lk-chat-input-wrapper">
+          <input
+            className="lk-form-control lk-chat-form-input"
+            disabled={isSending}
+            ref={inputRef}
+            type="text"
+            placeholder="Send a message to everyone"
+            onInput={(ev) => ev.stopPropagation()}
+            onKeyDown={(ev) => ev.stopPropagation()}
+            onKeyUp={(ev) => ev.stopPropagation()}
+          />
+          <button type="submit" className="lk-button lk-chat-form-button" disabled={isSending}>
+            <span className="material-icons">send</span>
+          </button>
+        </div>
       </form>
     </div>
   );
