@@ -20,7 +20,7 @@ import { ParticipantPlaceholder } from '../../assets/images';
 import { LockLockedIcon, ScreenShareIcon } from '../../assets/icons';
 import { VideoTrack } from './VideoTrack';
 import { AudioTrack } from './AudioTrack';
-import { useParticipantTile } from '../../hooks';
+import { useParticipantTile, useTrackToggle } from '../../hooks';
 import { useIsEncrypted } from '../../hooks/useIsEncrypted';
 
 /**
@@ -106,6 +106,8 @@ export const ParticipantTile: (
   ) {
     const trackReference = useEnsureTrackRef(trackRef);
 
+    const { enabled: isCameraEnabled } = useTrackToggle({ source: Track.Source.Camera });
+
     const { elementProps } = useParticipantTile<HTMLDivElement>({
       htmlProps,
       disableSpeakingIndicator,
@@ -170,14 +172,11 @@ export const ParticipantTile: (
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'orange',
             width: '100%',
             height: '100%',
-            padding: '10px',
           }}
         >
-          {renderVideo()}
-          <ParticipantPlaceholder />
+          {isCameraEnabled ? renderVideo() : <ParticipantPlaceholder />}
           {renderVideoControls()}
         </div>
       );
@@ -231,8 +230,6 @@ export const ParticipantTile: (
           alignItems: 'center',
           width: '100%',
           height: '100%',
-          backgroundColor: 'purple',
-          padding: '10px',
         }}
         {...elementProps}
       >
