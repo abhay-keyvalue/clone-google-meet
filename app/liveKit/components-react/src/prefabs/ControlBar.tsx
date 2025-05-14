@@ -1,3 +1,4 @@
+import './ControlBar.css';
 import { Track } from 'livekit-client';
 import * as React from 'react';
 import { MediaDeviceMenu } from './MediaDeviceMenu';
@@ -130,77 +131,68 @@ export function ControlBar({
   );
 
   return (
-    <div {...htmlProps}>
-      {visibleControls.microphone && (
-        <div className="lk-button-group">
-          <TrackToggle
-            source={Track.Source.Microphone}
-            showIcon={showIcon}
-            onChange={microphoneOnChange}
-            onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Microphone, error })}
-          >
-            {showText && 'Microphone'}
-          </TrackToggle>
-          <div className="lk-button-group-menu">
-            <MediaDeviceMenu
-              kind="audioinput"
-              onActiveDeviceChange={(_kind, deviceId) =>
-                saveAudioInputDeviceId(deviceId ?? 'default')
-              }
+    <div className="lk-controlbar-root">
+      <div className="lk-controlbar-info">
+        <span className="lk-controlbar-time">1:19 AM</span>
+        <span className="lk-controlbar-divider">|</span>
+        <span className="lk-controlbar-code">tcg-ujwz-pgq</span>
+      </div>
+      <div className="lk-controlbar-center">
+        {visibleControls.microphone && (
+          <div className="lk-controlbar-btn-group">
+            <TrackToggle
+              source={Track.Source.Microphone}
+              showIcon={showIcon}
+              onChange={microphoneOnChange}
+              onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Microphone, error })}
             />
           </div>
-        </div>
-      )}
-      {visibleControls.camera && (
-        <div className="lk-button-group">
-          <TrackToggle
-            source={Track.Source.Camera}
-            showIcon={showIcon}
-            onChange={cameraOnChange}
-            onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Camera, error })}
-          >
-            {showText && 'Camera'}
-          </TrackToggle>
-          <div className="lk-button-group-menu">
-            <MediaDeviceMenu
-              kind="videoinput"
-              onActiveDeviceChange={(_kind, deviceId) =>
-                saveVideoInputDeviceId(deviceId ?? 'default')
-              }
+        )}
+        {visibleControls.camera && (
+          <div className="lk-controlbar-btn-group">
+            <TrackToggle
+              source={Track.Source.Camera}
+              showIcon={showIcon}
+              onChange={cameraOnChange}
+              onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Camera, error })}
             />
           </div>
-        </div>
-      )}
-      {visibleControls.screenShare && browserSupportsScreenSharing && (
-        <TrackToggle
-          source={Track.Source.ScreenShare}
-          captureOptions={{ audio: true, selfBrowserSurface: 'include' }}
-          showIcon={showIcon}
-          onChange={onScreenShareChange}
-          onDeviceError={(error) => onDeviceError?.({ source: Track.Source.ScreenShare, error })}
-        >
-          {showText && (isScreenShareEnabled ? 'Stop screen share' : 'Share screen')}
-        </TrackToggle>
-      )}
-      {visibleControls.chat && (
-        <ChatToggle>
-          {showIcon && <ChatIcon />}
-          {showText && 'Chat'}
-        </ChatToggle>
-      )}
-      {visibleControls.settings && (
-        <SettingsMenuToggle>
-          {showIcon && <GearIcon />}
-          {showText && 'Settings'}
-        </SettingsMenuToggle>
-      )}
-      {visibleControls.leave && (
-        <DisconnectButton>
-          {showIcon && <LeaveIcon />}
-          {showText && 'Leave'}
-        </DisconnectButton>
-      )}
-      <StartMediaButton />
+        )}
+        {visibleControls.screenShare && browserSupportsScreenSharing && (
+          <TrackToggle
+            source={Track.Source.ScreenShare}
+            captureOptions={{ audio: true, selfBrowserSurface: 'include' }}
+            showIcon={showIcon}
+            onChange={onScreenShareChange}
+            onDeviceError={(error) => onDeviceError?.({ source: Track.Source.ScreenShare, error })}
+          />
+        )}
+        {visibleControls.chat && (
+          <ChatToggle>
+            {showIcon && <ChatIcon />}
+          </ChatToggle>
+        )}
+        {visibleControls.settings && (
+          <SettingsMenuToggle>
+            {showIcon && <GearIcon />}
+          </SettingsMenuToggle>
+        )}
+        {visibleControls.leave && (
+          <DisconnectButton>
+            {showIcon && <LeaveIcon />}
+          </DisconnectButton>
+        )}
+        <StartMediaButton />
+      </div>
+      <div className="lk-controlbar-actions">
+        <span className="lk-controlbar-action-icon info" />
+        <span className="lk-controlbar-action-icon people">
+          <span className="lk-controlbar-badge">1</span>
+        </span>
+        <span className="lk-controlbar-action-icon chat" />
+        <span className="lk-controlbar-action-icon apps" />
+        <span className="lk-controlbar-action-icon lock" />
+      </div>
     </div>
   );
 }

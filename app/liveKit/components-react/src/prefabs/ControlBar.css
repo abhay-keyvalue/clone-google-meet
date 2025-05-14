@@ -1,0 +1,142 @@
+/* Root bar layout */
+.lk-controlbar-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #181818;
+  padding:50px;
+  height: 64px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.lk-controlbar-info {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+  gap: 12px;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+.lk-controlbar-time {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.lk-controlbar-divider {
+  color: #888;
+  font-size: 20px;
+}
+.lk-controlbar-code {
+  background: #232323;
+  border-radius: 8px;
+  padding: 2px 12px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.lk-controlbar-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.lk-controlbar-btn-group {
+  display: flex;
+  align-items: center;
+}
+.lk-controlbar-center button,
+.lk-controlbar-center .lk-controlbar-btn-group > * {
+  background: #232323;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+  color: #fff;
+  font-size: 22px;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.lk-controlbar-center button:hover,
+.lk-controlbar-center .lk-controlbar-btn-group > *:hover {
+  background: #353535;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.lk-controlbar-center .lk-controlbar-btn-group > *:active {
+  background: #444;
+}
+
+.lk-controlbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.lk-controlbar-action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.lk-controlbar-action-icon.info::before {
+  content: 'i';
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+.lk-controlbar-action-icon.people::before {
+  content: '\1F465'; /* 👥 */
+  font-size: 18px;
+}
+.lk-controlbar-action-icon.chat::before {
+  content: '\1F4AC'; /* 💬 */
+  font-size: 18px;
+}
+.lk-controlbar-action-icon.apps::before {
+  content: '\25A4'; /* ▤ */
+  font-size: 18px;
+}
+.lk-controlbar-action-icon.lock::before {
+  content: '\1F512'; /* 🔒 */
+  font-size: 18px;
+}
+.lk-controlbar-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #4285f4;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border: 2px solid #181818;
+}
+
+@media (max-width: 900px) {
+  .lk-controlbar-root {
+    padding: 0 8px;
+    height: 56px;
+  }
+  .lk-controlbar-center button,
+  .lk-controlbar-center .lk-controlbar-btn-group > * {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  .lk-controlbar-action-icon {
+    width: 28px;
+    height: 28px;
+  }
+} 

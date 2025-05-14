@@ -499,7 +499,7 @@ export function PreJoin({
         <form className="lk-join-form">
           <div className="lk-room-info">
             <div className="lk-room-name">
-              {username ? `Meeting with ${username}` : 'Sample Meeting'}
+              {typeof window === 'undefined' ? 'Sample Meeting' : (username ? `Meeting with ${username}` : 'Sample Meeting')}
             </div>
             <div className="lk-room-subtext">No one else is here</div>
           </div>

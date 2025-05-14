@@ -47,7 +47,7 @@ export function GridLayout({ tracks, ...props }: GridLayoutProps) {
   });
 
   return (
-    <div ref={gridEl} data-lk-pagination={pagination.totalPageCount > 1} {...elementProps}>
+    <div ref={gridEl} data-lk-pagination={pagination.totalPageCount > 1} {...elementProps} style={{backgroundColor: 'blue', width: '100%', height: '100%'}}>
       <TrackLoop tracks={pagination.tracks}>{props.children}</TrackLoop>
       {tracks.length > layout.maxTiles && (
         <>

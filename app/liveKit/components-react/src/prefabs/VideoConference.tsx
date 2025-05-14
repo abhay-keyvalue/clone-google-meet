@@ -131,18 +131,19 @@ export function VideoConference({
   useWarnAboutMissingStyles();
 
   return (
-    <div className="lk-video-conference" {...props}>
+    <div className="lk-video-conference" style={{backgroundColor: 'green', width: '100%', height: '100vh'}} {...props}>
       {isWeb() && (
         <LayoutContextProvider
           value={layoutContext}
           // onPinChange={handleFocusStateChange}
           onWidgetChange={widgetUpdate}
         >
-          <div className="lk-video-conference-inner">
+          <div className="lk-video-conference-inner" style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'red', width: '100%', height: '100%'}}>
             {!focusTrack ? (
-              <div className="lk-grid-layout-wrapper">
+              <div className="lk-grid-layout-wrapper" style={{backgroundColor: 'yellow', width: '100%', height: '100%', padding: '10px'}}>
                 <GridLayout tracks={tracks}>
                   <ParticipantTile />
+                  {/* TO DO: Add a grid layout for the participants */}
                 </GridLayout>
               </div>
             ) : (

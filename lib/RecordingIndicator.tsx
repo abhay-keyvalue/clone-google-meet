@@ -1,4 +1,4 @@
-import { useIsRecording } from '@livekit/components-react';
+import { useIsRecording } from '../app/liveKit/components-react/src/hooks/useIsRecording';
 import * as React from 'react';
 import toast from 'react-hot-toast';
 

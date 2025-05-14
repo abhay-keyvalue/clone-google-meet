@@ -1,6 +1,6 @@
 'use client';
 
-import { formatChatMessageLinks, RoomContext, VideoConference } from '@livekit/components-react';
+import { formatChatMessageLinks } from '@livekit/components-react';
 import {
   ExternalE2EEKeyProvider,
   LogLevel,
@@ -14,6 +14,10 @@ import { DebugMode } from '@/lib/Debug';
 import { useEffect, useMemo } from 'react';
 import { decodePassphrase } from '@/lib/client-utils';
 import { SettingsMenu } from '@/lib/SettingsMenu';
+import {
+  VideoConference,
+} from '../liveKit/components-react/src/prefabs/VideoConference';
+import { RoomContext } from '../liveKit/components-react/src/context/room-context';
 
 export function VideoConferenceClientImpl(props: {
   liveKitUrl: string;
