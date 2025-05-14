@@ -456,8 +456,8 @@ export function PreJoin({
               className="lk-user-name"
               id="username"
               name="username"
-              type="text"
               value={username}
+              readOnly
               autoComplete="off"
               style={{
                 color: '#fff',

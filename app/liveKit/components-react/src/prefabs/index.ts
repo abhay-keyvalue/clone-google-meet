@@ -9,3 +9,4 @@ export {
   type VoiceAssistantControlBarProps,
   type VoiceAssistantControlBarControls,
 } from './VoiceAssistantControlBar';
+export { Participants } from './Participants';

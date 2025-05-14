@@ -31,3 +31,5 @@ export {
   ChatEntry,
   formatChatMessageLinks,
 } from '../components/ChatEntry';
+export { ArticulationList } from './ArticulationList';
+export { ParticipantsToggle } from './ParticipantsToggle';

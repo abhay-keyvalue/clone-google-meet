@@ -18,6 +18,8 @@ import { CaptionButton } from '../components/controls/CaptionButton';
 import { RaiseHandButton } from '../components/controls/RaiseHandButton';
 import { MoreOptionsButton } from '../components/controls/MoreOptionsButton';
 import { Chat } from './Chat';
+import { ParticipantsToggle } from '../components/ParticipantsToggle';
+
 
 
 /** @public */
@@ -31,6 +33,7 @@ export type ControlBarControls = {
   caption?: boolean;
   raiseHand?: boolean;
   moreOptions?: boolean;
+  participants?: boolean;
 };
 
 /** @public */
@@ -90,6 +93,7 @@ export function ControlBar({
     caption: true,
     raiseHand: true,
     moreOptions: true,
+    participants: true,
     ...controls 
   };
 
@@ -229,13 +233,17 @@ export function ControlBar({
             {showIcon && <LeaveIcon />}
           </DisconnectButton>
         )}
-        <StartMediaButton />
       </div>
       <div className="lk-controlbar-actions">
         {visibleControls.chat && (
           <ChatToggle className="lk-controlbar-action-icon">
             <span className="material-icons">chat</span>
           </ChatToggle>
+        )}
+        {visibleControls.participants && (
+          <ParticipantsToggle className="lk-controlbar-action-icon">
+            <span className="material-icons">group</span>
+          </ParticipantsToggle>
         )}
         <button className="lk-controlbar-action-icon tools">
           <span className="material-icons">apps</span>

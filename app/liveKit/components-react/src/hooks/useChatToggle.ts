@@ -2,6 +2,7 @@ import { setupChatToggle } from '@livekit/components-core';
 import { useLayoutContext } from '../context';
 import { mergeProps } from '../mergeProps';
 import * as React from 'react';
+import type { WidgetState } from '@livekit/components-core';
 
 /** @public */
 export interface UseChatToggleProps {
@@ -34,6 +35,31 @@ export function useChatToggle({ props }: UseChatToggleProps) {
           ? state.unreadMessages.toFixed(0)
           : '9+'
         : '0',
+    });
+  }, [props, className, dispatch, state]);
+
+  return { mergedProps };
+}
+
+export interface UseParticipantsToggleProps {
+  props: React.ButtonHTMLAttributes<HTMLButtonElement>;
+}
+
+export function useParticipantsToggle({ props }: UseParticipantsToggleProps) {
+  const { dispatch, state } = useLayoutContext().widget;
+  const className = 'lk-participants-toggle';
+
+  const mergedProps = React.useMemo(() => {
+    const widgetState = state as WidgetState;
+    return mergeProps(props, {
+      className,
+      onClick: () => {
+        if (dispatch) {
+          dispatch({ msg: 'toggle_participants' });
+        }
+      },
+      'aria-pressed': widgetState?.showParticipants ? 'true' : 'false',
+      'data-lk-participants': widgetState?.showParticipants ? 'true' : 'false',
     });
   }, [props, className, dispatch, state]);
 

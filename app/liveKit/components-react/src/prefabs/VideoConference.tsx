@@ -23,6 +23,7 @@ import { usePinnedTracks, useTracks } from '../hooks';
 import { Chat } from './Chat';
 import { ControlBar } from './ControlBar';
 import { useWarnAboutMissingStyles } from '../hooks/useWarnAboutMissingStyles';
+import { Participants } from './Participants';
 
 /**
  * @public
@@ -64,6 +65,7 @@ export function VideoConference({
     showChat: false,
     unreadMessages: 0,
     showSettings: false,
+    showParticipants: false,
   });
   const lastAutoFocusedScreenShareTrack = React.useRef<TrackReferenceOrPlaceholder | null>(null);
 
@@ -192,7 +194,6 @@ export function VideoConference({
       {isWeb() && (
         <LayoutContextProvider
           value={layoutContext}
-          // onPinChange={handleFocusStateChange}
           onWidgetChange={widgetUpdate}
         >
           <div
@@ -209,10 +210,10 @@ export function VideoConference({
             }}
           >
             {renderVideoConference()}
-            {/* TO DO: Add a control bar for the video conference */}
             <ControlBar controls={{ chat: true, settings: !!SettingsComponent }} />
           </div>
           {renderChat()}
+          {widgetState.showParticipants && <Participants />}
           {SettingsComponent && renderSettings(SettingsComponent)}
         </LayoutContextProvider>
       )}
