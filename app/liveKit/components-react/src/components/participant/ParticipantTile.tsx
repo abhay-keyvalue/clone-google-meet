@@ -132,61 +132,113 @@ export const ParticipantTile: (
       [trackReference, layoutContext],
     );
 
+    const renderVideo = () => {
+      return (
+        <div
+          style={{
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            zIndex: '100',
+          }}
+        >
+          {isTrackReference(trackReference) &&
+          (trackReference.publication?.kind === 'video' ||
+            trackReference.source === Track.Source.Camera ||
+            trackReference.source === Track.Source.ScreenShare) ? (
+            <VideoTrack
+              trackRef={trackReference}
+              onSubscriptionStatusChanged={handleSubscribe}
+              manageSubscription={autoManageSubscription}
+            />
+          ) : (
+            isTrackReference(trackReference) && (
+              <AudioTrack trackRef={trackReference} onSubscriptionStatusChanged={handleSubscribe} />
+            )
+          )}
+        </div>
+      );
+    };
+
+    const renderPlaceholder = () => {
+      return (
+        <div
+          style={{
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'orange',
+            width: '100%',
+            height: '100%',
+            padding: '10px',
+          }}
+        >
+          {renderVideo()}
+          <ParticipantPlaceholder />
+          {renderVideoControls()}
+        </div>
+      );
+    };
+
+    const renderVideoControls = () => {
+      return (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '0',
+            right: '0',
+            zIndex: '101',
+          }}
+          className="lk-participant-metadata"
+        >
+          <div className="lk-participant-metadata-item">
+            {trackReference.source === Track.Source.Camera ? (
+              <>
+                {isEncrypted && <LockLockedIcon style={{ marginRight: '0.25rem' }} />}
+                <TrackMutedIndicator
+                  trackRef={{
+                    participant: trackReference.participant,
+                    source: Track.Source.Microphone,
+                  }}
+                  show={'muted'}
+                ></TrackMutedIndicator>
+                <ParticipantName />
+              </>
+            ) : (
+              <>
+                <ScreenShareIcon style={{ marginRight: '0.25rem' }} />
+                <ParticipantName>&apos;s screen</ParticipantName>
+              </>
+            )}
+          </div>
+          <ConnectionQualityIndicator className="lk-participant-metadata-item" />
+          <FocusToggle trackRef={trackReference} />
+        </div>
+      );
+    };
+
     return (
-      <div ref={ref} style={{ position: 'relative' , display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}} {...elementProps}>
+      <div
+        ref={ref}
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'purple',
+          padding: '10px',
+        }}
+        {...elementProps}
+      >
         <TrackRefContextIfNeeded trackRef={trackReference}>
           <ParticipantContextIfNeeded participant={trackReference.participant}>
-
-            {children ?? (
-              <div style={{position: 'relative', backgroundColor: 'purple', width: '100%', height: '100%'}}>
-                <div style={{position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', zIndex: '100'}}>
-                {isTrackReference(trackReference) &&
-                (trackReference.publication?.kind === 'video' ||
-                  trackReference.source === Track.Source.Camera ||
-                  trackReference.source === Track.Source.ScreenShare) ? (
-                  <VideoTrack
-                    trackRef={trackReference}
-                    onSubscriptionStatusChanged={handleSubscribe}
-                    manageSubscription={autoManageSubscription}
-                  />
-                ) : (
-                  isTrackReference(trackReference) && (
-                    <AudioTrack
-                      trackRef={trackReference}
-                      onSubscriptionStatusChanged={handleSubscribe}
-                    />
-                  )
-                )}
-                </div>
-                <div className="lk-participant-placeholder">
-                  <ParticipantPlaceholder />
-                </div>
-                <div className="lk-participant-metadata">
-                  <div className="lk-participant-metadata-item">
-                    {trackReference.source === Track.Source.Camera ? (
-                      <>
-                        {isEncrypted && <LockLockedIcon style={{ marginRight: '0.25rem' }} />}
-                        <TrackMutedIndicator
-                          trackRef={{
-                            participant: trackReference.participant,
-                            source: Track.Source.Microphone,
-                          }}
-                          show={'muted'}
-                        ></TrackMutedIndicator>
-                        <ParticipantName />
-                      </>
-                    ) : (
-                      <>
-                        <ScreenShareIcon style={{ marginRight: '0.25rem' }} />
-                        <ParticipantName>&apos;s screen</ParticipantName>
-                      </>
-                    )}
-                  </div>
-                  <ConnectionQualityIndicator className="lk-participant-metadata-item" />
-                </div>
-              </div>
-            )}
-            <FocusToggle trackRef={trackReference} />
+            {children ?? renderPlaceholder()}
           </ParticipantContextIfNeeded>
         </TrackRefContextIfNeeded>
       </div>

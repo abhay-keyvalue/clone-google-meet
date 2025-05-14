@@ -88,6 +88,6 @@ export const VideoTrack: (
     };
 
     // TO DO: Add a grid layout for the participants
-    return <div style={{backgroundColor: 'red', width: '200px', height: '200px' , padding: '10px'}}><video ref={mediaEl} width={'100%'} height={'100%'} {...elementProps} muted={true} onClick={clickHandler}></video></div>;
+    return <div style={{backgroundColor: 'red', width: '100%', height: '100%' , padding: '10px'}}><video ref={mediaEl} width={'100%'} height={'100%'} {...elementProps} muted={true} onClick={clickHandler}></video></div>;
   },
 );
