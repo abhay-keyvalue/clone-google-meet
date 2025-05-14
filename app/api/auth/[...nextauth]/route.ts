@@ -1,17 +1,37 @@
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import { NextResponse } from 'next/server';
 
-const authOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    }),
-  ],
-  pages: {
-    signIn: '/auth/signin',
-  },
-};
+// List of fun names for random selection
+const names = [
+  'Cosmic Explorer',
+  'Pixel Pioneer',
+  'Digital Dreamer',
+  'Tech Wanderer',
+  'Code Voyager',
+  'Byte Buddy',
+  'Data Dancer',
+  'Web Whisperer',
+  'Cloud Cruiser',
+  'Binary Bard'
+];
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST }; 
+// List of fun avatars
+const avatars = [
+  'https://api.dicebear.com/7.x/bottts/svg?seed=1',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=2',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=3',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=4',
+  'https://api.dicebear.com/7.x/bottts/svg?seed=5'
+];
+
+export async function GET() {
+  const randomName = names[Math.floor(Math.random() * names.length)];
+  const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+  
+  return NextResponse.json({
+    user: {
+      name: randomName,
+      image: randomAvatar,
+      id: Math.random().toString(36).substring(7)
+    }
+  });
+} 
