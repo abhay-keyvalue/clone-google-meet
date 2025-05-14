@@ -251,7 +251,7 @@ export function PreJoin({
   const [videoEnabled, setVideoEnabled] = React.useState<boolean>(userChoices.videoEnabled);
   const [audioDeviceId, setAudioDeviceId] = React.useState<string>(userChoices.audioDeviceId);
   const [videoDeviceId, setVideoDeviceId] = React.useState<string>(userChoices.videoDeviceId);
-  const [username, setUsername] = React.useState(userChoices.username);
+  const [username, setUsername] = React.useState(userChoices.username || '');
 
   // Save user choices to persistent storage.
   React.useEffect(() => {
@@ -437,10 +437,23 @@ export function PreJoin({
               id="username"
               name="username"
               type="text"
-              defaultValue={username || 'Anonyms'}
-              placeholder={userLabel}
+              value={username}
+              placeholder={userLabel || "Enter your name"}
               onChange={(inputEl) => setUsername(inputEl.target.value)}
               autoComplete="off"
+              style={{
+                color: '#fff',
+                fontSize: '14px',
+                border: '1px solid rgba(255,255,255,0.3)',
+                fontWeight: 500,
+                background: 'rgba(0,0,0,0.2)',
+                borderRadius: '12px',
+                padding: '0.3em 1em',
+                minWidth: '100px',
+                pointerEvents: 'auto',
+                outline: 'none',
+                transition: 'all 0.2s',
+              }}
             />
             <span className="lk-video-quality">1080p</span>
           </div>

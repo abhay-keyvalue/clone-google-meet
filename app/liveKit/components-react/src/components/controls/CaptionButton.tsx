@@ -50,7 +50,7 @@ export function CaptionButton({ showIcon = true, ...props }: CaptionButtonProps)
             fontSize: '16px',
           }}
         >
-          <i className="google-material-icons">check_circle</i>
+          <span className="material-icons">check_circle</span>
         </span>
       )}
     </button>
