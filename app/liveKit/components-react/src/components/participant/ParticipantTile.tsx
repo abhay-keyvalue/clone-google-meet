@@ -164,6 +164,11 @@ export const ParticipantTile: (
       );
     };
 
+    const renderPlaceholderImage = () => {
+      return (
+        <ParticipantPlaceholder />
+      )};
+
     const renderPlaceholder = () => {
       return (
         <div
@@ -176,7 +181,9 @@ export const ParticipantTile: (
             height: '100%',
           }}
         >
-          {isCameraEnabled ? renderVideo() : <ParticipantPlaceholder />}
+          {renderVideo()}
+          {renderPlaceholderImage()}
+          {/* {isCameraEnabled ? renderVideo() : <ParticipantPlaceholder />} */}
           {renderVideoControls()}
         </div>
       );
@@ -186,16 +193,27 @@ export const ParticipantTile: (
       return (
         <div
           style={{
+            display: 'flex',
+            flexDirection: 'row',
             position: 'absolute',
             bottom: '0',
-            right: '0',
+            left: '0',
+            padding: '10px',
             zIndex: '101',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '10px',
+            backdropFilter: 'blur(10px)',
+            margin: '10px',
           }}
           className="lk-participant-metadata"
         >
-          <div className="lk-participant-metadata-item">
+          <div
+            className="lk-participant-metadata-item"
+            style={{ display: 'flex', flexDirection: 'row', gap: '10px', alignItems: 'center' }}
+          >
             {trackReference.source === Track.Source.Camera ? (
               <>
+                <ParticipantName />
                 {isEncrypted && <LockLockedIcon style={{ marginRight: '0.25rem' }} />}
                 <TrackMutedIndicator
                   trackRef={{
@@ -204,17 +222,16 @@ export const ParticipantTile: (
                   }}
                   show={'muted'}
                 ></TrackMutedIndicator>
-                <ParticipantName />
+                <ConnectionQualityIndicator className="lk-participant-metadata-item" />
+                <FocusToggle trackRef={trackReference} />
               </>
             ) : (
               <>
-                <ScreenShareIcon style={{ marginRight: '0.25rem' }} />
                 <ParticipantName>&apos;s screen</ParticipantName>
+                <ScreenShareIcon style={{ marginRight: '0.25rem' }} />
               </>
             )}
           </div>
-          <ConnectionQualityIndicator className="lk-participant-metadata-item" />
-          <FocusToggle trackRef={trackReference} />
         </div>
       );
     };

@@ -4,6 +4,7 @@ import { useMediaTrackBySourceOrName } from '../../hooks/useMediaTrackBySourceOr
 import type { ParticipantClickEvent, TrackReference } from '@livekit/components-core';
 import { useEnsureTrackRef } from '../../context';
 import * as useHooks from 'usehooks-ts';
+import { ParticipantPlaceholder } from '../../assets/images';
 
 /** @public */
 export interface VideoTrackProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
@@ -22,7 +23,7 @@ export interface VideoTrackProps extends React.VideoHTMLAttributes<HTMLVideoElem
  * ```tsx
  * <VideoTrack trackRef={trackRef} />
  * ```
- * @see {@link @livekit/components-react#ParticipantTile | ParticipantTile}
+ * @see {@link @livekit/components-react#ParticipantTile | ParticipantTile}
  * @public
  */
 export const VideoTrack: (
@@ -87,7 +88,24 @@ export const VideoTrack: (
       onTrackClick?.({ participant: trackReference?.participant, track: pub });
     };
 
+    console.log('trackReference', trackReference);
+
     // TO DO: Add a grid layout for the participants
-    return <div style={{ width: '100%', height: '100%'}}><video ref={mediaEl} width={'100%'} height={'100%'} {...elementProps} muted={true} onClick={clickHandler}></video></div>;
+    return (
+      <div style={{ width: '100%', height: '100%' }}>
+        {isSubscribed && pub ? ( // Check if track is subscribed and publication exists
+          <video
+            ref={mediaEl}
+            width={'100%'}
+            height={'100%'}
+            {...elementProps}
+            muted={true}
+            onClick={clickHandler}
+          ></video>
+        ) : (
+          <ParticipantPlaceholder />
+        )}
+      </div>
+    );
   },
 );

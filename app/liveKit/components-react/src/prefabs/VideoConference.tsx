@@ -145,8 +145,8 @@ export function VideoConference({
       );
     } else {
       return (
-        <div className="lk-focus-layout-wrapper">
-          <FocusLayoutContainer>
+        <div className="lk-focus-layout-wrapper" style={{ padding: '0px'}}>
+          <FocusLayoutContainer style={{display: 'flex', flexDirection: 'row', gap: '10px', width: '100%', height: '100%'}}>
             <CarouselLayout tracks={carouselTracks}>
               <ParticipantTile />
             </CarouselLayout>

@@ -73,7 +73,7 @@ export function CarouselLayout({ tracks, orientation, ...props }: CarouselLayout
   }, [maxVisibleTiles, carouselOrientation]);
 
   return (
-    <aside key={carouselOrientation} className="lk-carousel" ref={asideEl} {...props}>
+    <aside key={carouselOrientation} className="lk-carousel" ref={asideEl} style={{ width: '100%', height: '100%'}} {...props}>
       <TrackLoop tracks={sortedTiles}>{props.children}</TrackLoop>
     </aside>
   );

@@ -37,7 +37,7 @@ export const FocusToggle: (
       <LayoutContext.Consumer>
         {(layoutContext) =>
           layoutContext !== undefined && (
-            <button ref={ref} {...mergedProps}>
+            <button style={{backgroundColor: 'transparent', border: 'none', cursor: 'pointer'}} ref={ref} {...mergedProps}>
               {props.children ? (
                 props.children
               ) : inFocus ? (

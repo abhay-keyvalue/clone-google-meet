@@ -33,5 +33,5 @@ export interface FocusLayoutProps extends React.HTMLAttributes<HTMLElement> {
  * @public
  */
 export function FocusLayout({ trackRef, ...htmlProps }: FocusLayoutProps) {
-  return <ParticipantTile trackRef={trackRef} {...htmlProps} />;
+  return <div style={{width: '100%', height: '100%'}}><ParticipantTile trackRef={trackRef} {...htmlProps} /></div>;
 }
