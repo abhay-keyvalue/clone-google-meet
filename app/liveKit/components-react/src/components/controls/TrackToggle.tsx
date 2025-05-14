@@ -38,6 +38,7 @@ export const TrackToggle: <T extends ToggleSource>(
 ) => React.ReactNode = /* @__PURE__ */ React.forwardRef(function TrackToggle<
   T extends ToggleSource,
 >({ showIcon, ...props }: TrackToggleProps<T>, ref: React.ForwardedRef<HTMLButtonElement>) {
+
   const { buttonProps, enabled } = useTrackToggle(props);
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {

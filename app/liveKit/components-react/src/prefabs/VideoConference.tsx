@@ -135,7 +135,7 @@ export function VideoConference({
       return (
         <div
           className="lk-grid-layout-wrapper"
-          style={{ backgroundColor: 'yellow', width: '100%', height: '100%', padding: '10px' }}
+          style={{width: '100%', height: '100%'}}
         >
           <GridLayout tracks={tracks}>
             <ParticipantTile />
@@ -182,7 +182,7 @@ export function VideoConference({
   return (
     <div
       className="lk-video-conference"
-      style={{ backgroundColor: 'green', width: '100%', height: '100vh' }}
+      style={{ width: '100%', height: '100vh' }}
       {...props}
     >
       {isWeb() && (
@@ -198,9 +198,9 @@ export function VideoConference({
               flexDirection: 'column',
               justifyContent: 'space-between',
               alignItems: 'center',
-              backgroundColor: 'red',
               width: '100%',
               height: '100%',
+              backgroundColor: '#181818',
             }}
           >
             {renderVideoConference()}

@@ -103,7 +103,7 @@ export function PageClientImpl(props: {
   return (
     <main style={{backgroundColor: '#FFF'}}>
       {connectionDetails === undefined || preJoinChoices === undefined ? (
-        <div style={{backgroundColor: 'red'}}>
+        <div>
           <PrejoinHeader /> 
           <PreJoin
             defaults={preJoinDefaults}
@@ -131,7 +131,7 @@ function VideoConferenceContent() {
   const [showChat, setShowChat] = useState(false);
 
   return (
-    <div style={{backgroundColor: 'red', padding: '10px', width: '500px', height: '400px'}}>
+    <div style={{ width: '500px', height: '400px'}}>
     <VideoConference
       chatMessageFormatter={formatChatMessageLinks}
       SettingsComponent={SHOW_SETTINGS_MENU ? SettingsMenu : undefined}
