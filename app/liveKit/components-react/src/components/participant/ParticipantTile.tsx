@@ -188,12 +188,15 @@ export const ParticipantTile: (
           style={{
             position: 'absolute',
             bottom: '0',
+            left: '0',
             right: '0',
             zIndex: '101',
+            background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
+            padding: '16px',
           }}
           className="lk-participant-metadata"
         >
-          <div className="lk-participant-metadata-item">
+          <div className="lk-participant-metadata-item" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {trackReference.source === Track.Source.Camera ? (
               <>
                 {isEncrypted && <LockLockedIcon style={{ marginRight: '0.25rem' }} />}
@@ -204,12 +207,22 @@ export const ParticipantTile: (
                   }}
                   show={'muted'}
                 ></TrackMutedIndicator>
-                <ParticipantName />
+                <ParticipantName style={{ 
+                  color: '#fff',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                }} />
               </>
             ) : (
               <>
                 <ScreenShareIcon style={{ marginRight: '0.25rem' }} />
-                <ParticipantName>&apos;s screen</ParticipantName>
+                <ParticipantName style={{ 
+                  color: '#fff',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                }}>&apos;s screen</ParticipantName>
               </>
             )}
           </div>

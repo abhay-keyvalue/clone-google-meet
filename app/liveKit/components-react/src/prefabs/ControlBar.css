@@ -57,6 +57,7 @@
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   border-radius: 10px;
+  background: #f6f9ff;
 }
 
 .lk-chat[style*="display: grid"] {
@@ -78,7 +79,7 @@
   grid-row: 1;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .lk-chat-header-title {
@@ -95,7 +96,7 @@
 }
 
 .lk-chat-messages-container {
-  background: #f8f9fa;
+  background: #f6f9ff;
   overflow: hidden;
   grid-row: 2;
   display: flex;
@@ -148,7 +149,7 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 }
 
 .lk-chat-input-wrapper {
@@ -229,7 +230,7 @@
 }
 
 .lk-chat-entry[data-lk-message-origin='local'] {
-  background: #f6f9ff;
+  background: #e8f0fe;
   margin-left: auto;
 }
 
