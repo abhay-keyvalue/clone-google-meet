@@ -1,33 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 interface PrejoinButtonProps {
   onProfileLoad?: (username: string) => void;
 }
 
 const PrejoinButton: React.FC<PrejoinButtonProps> = ({ onProfileLoad }) => {
-  const [profile, setProfile] = useState<{ username: string; avatar: string } | null>(null);
+  const { data: session } = useSession();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch('https://randomuser.me/api/');
-        const data = await response.json();
-        const user = data.results[0];
-        const username = `${user.name.first} ${user.name.last}`;
-        const avatar = user.picture.thumbnail;
-        
-        setProfile({ username, avatar });
-        onProfileLoad?.(username);
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
-    };
-
-    fetchProfile();
-  }, [onProfileLoad]);
+  React.useEffect(() => {
+    if (session?.user?.name) {
+      onProfileLoad?.(session.user.name);
+    }
+  }, [session, onProfileLoad]);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -45,13 +33,12 @@ const PrejoinButton: React.FC<PrejoinButtonProps> = ({ onProfileLoad }) => {
           position: 'relative',
         }}
         aria-expanded={isExpanded}
-        aria-label={`Google Account: ${profile?.username || 'User'}`}
+        aria-label={`Google Account: ${session?.user?.name || 'User'}`}
         role="button"
         tabIndex={0}
       >
         <img 
-          src={profile?.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=default'}
-          srcSet={`${profile?.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=default'} 1x, ${profile?.avatar?.replace('thumbnail', 'large') || 'https://api.dicebear.com/7.x/bottts/svg?seed=default'} 2x`}
+          src={session?.user?.image || 'https://api.dicebear.com/7.x/bottts/svg?seed=default'}
           alt=""
           aria-hidden="true"
           data-noaft=""
@@ -100,7 +87,7 @@ const PrejoinButton: React.FC<PrejoinButtonProps> = ({ onProfileLoad }) => {
             padding: '8px 16px',
             borderBottom: '1px solid #dadce0',
           }}>
-            <div style={{ fontWeight: 500 }}>{profile?.username || 'User'}</div>
+            <div style={{ fontWeight: 500 }}>{session?.user?.name || 'User'}</div>
             <div style={{ color: '#5f6368', fontSize: '14px' }}>Join meeting</div>
           </div>
           <button

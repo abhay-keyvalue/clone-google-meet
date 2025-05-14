@@ -253,6 +253,29 @@ export function PreJoin({
   const [videoDeviceId, setVideoDeviceId] = React.useState<string>(userChoices.videoDeviceId);
   const [username, setUsername] = React.useState(userChoices.username || '');
 
+  // Fetch and persist username from session
+  React.useEffect(() => {
+    const fetchAndPersistUsername = async () => {
+      try {
+        const response = await fetch('/api/auth/session');
+        if (response.ok) {
+          const data = await response.json();
+          const sessionUsername = data.user?.name || 'Anonymous User';
+          setUsername(sessionUsername);
+          // Persist the username
+          saveUsername(sessionUsername);
+        }
+      } catch (error) {
+        console.error('Error fetching username:', error);
+        const fallbackUsername = 'Anonymous User';
+        setUsername(fallbackUsername);
+        saveUsername(fallbackUsername);
+      }
+    };
+
+    fetchAndPersistUsername();
+  }, [saveUsername]);
+
   // Save user choices to persistent storage.
   React.useEffect(() => {
     saveAudioInputEnabled(audioEnabled);
@@ -266,9 +289,6 @@ export function PreJoin({
   React.useEffect(() => {
     saveVideoInputDeviceId(videoDeviceId);
   }, [videoDeviceId, saveVideoInputDeviceId]);
-  React.useEffect(() => {
-    saveUsername(username);
-  }, [username, saveUsername]);
 
   const tracks = usePreviewTracks(
     {
@@ -438,8 +458,6 @@ export function PreJoin({
               name="username"
               type="text"
               value={username}
-              placeholder={userLabel || "Enter your name"}
-              onChange={(inputEl) => setUsername(inputEl.target.value)}
               autoComplete="off"
               style={{
                 color: '#fff',

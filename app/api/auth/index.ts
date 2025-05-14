@@ -27,11 +27,18 @@ export async function GET() {
   const randomName = names[Math.floor(Math.random() * names.length)];
   const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
   
-  return NextResponse.json({
-    user: {
-      name: randomName,
-      image: randomAvatar,
-      id: Math.random().toString(36).substring(7)
+  return new NextResponse(
+    JSON.stringify({
+      user: {
+        name: randomName,
+        image: randomAvatar,
+        id: Math.random().toString(36).substring(7)
+      }
+    }),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
-  });
+  );
 } 

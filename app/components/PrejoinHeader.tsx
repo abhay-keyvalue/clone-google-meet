@@ -1,9 +1,43 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 const LOGO_URL = 'https://www.gstatic.com/meet/meet_logo_dark_2020q4_8955caafa87e403c96e24e8aa63f2433.svg';
-const AVATAR_URL = 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small_2x/default-avatar-icon-of-social-media-user-vector.jpg';
 
 const PrejoinHeader: React.FC = () => {
+  const { data: session } = useSession();
+  const [username, setUsername] = useState<string>('');
+
+  useEffect(() => {
+    const fetchAndPersistUsername = async () => {
+      try {
+        // First check localStorage
+        const savedUsername = localStorage.getItem('username');
+        if (savedUsername) {
+          setUsername(savedUsername);
+        }
+
+        // Then fetch from session
+        const response = await fetch('/api/auth/session');
+        if (response.ok) {
+          const data = await response.json();
+          const sessionUsername = data.user?.name || 'Anonymous User';
+          setUsername(sessionUsername);
+          // Persist to localStorage
+          localStorage.setItem('username', sessionUsername);
+        }
+      } catch (error) {
+        console.error('Error fetching username:', error);
+        const fallbackUsername = 'Anonymous User';
+        setUsername(fallbackUsername);
+        localStorage.setItem('username', fallbackUsername);
+      }
+    };
+
+    fetchAndPersistUsername();
+  }, []);
+
   return (
     <header style={{
       display: 'flex',
@@ -32,10 +66,14 @@ const PrejoinHeader: React.FC = () => {
           WebkitFontSmoothing: 'antialiased',
           WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
         }}>
-          <div style={{paddingBottom: '4px'}}>abhay@keyvalue.systems</div>
-          <div>Switch account</div>
+          <div style={{paddingBottom: '4px'}}>{username}</div>
+          <div style={{color: '#5f6368', cursor: 'pointer'}}>Switch account</div>
         </div>
-        <img src={AVATAR_URL} alt="AB" style={{ width: 40, height: 40, borderRadius: '50%', backgroundColor: '#f0f0f0' }} />
+        <img 
+          src={session?.user?.image || 'https://api.dicebear.com/7.x/bottts/svg?seed=default'} 
+          alt={username} 
+          style={{ width: 40, height: 40, borderRadius: '50%', backgroundColor: '#f0f0f0' }} 
+        />
       </div>
     </header>
   );

@@ -13,6 +13,7 @@ import {
   useTracks,
   useLocalParticipant,
 } from '@/app/liveKit/components-react';
+import { useSession } from 'next-auth/react';
 
 import { RoomContext } from '../../liveKit/components-react/src/context/room-context';
 
@@ -47,16 +48,17 @@ export function PageClientImpl(props: {
   hq: boolean;
   codec: VideoCodec;
 }) {
+  const { data: session } = useSession();
   const [preJoinChoices, setPreJoinChoices] = React.useState<LocalUserChoices | undefined>(
     undefined,
   );
   const preJoinDefaults = React.useMemo(() => {
     return {
-      username: '',
+      username: session?.user?.name || '',
       videoEnabled: true,
       audioEnabled: true,
     };
-  }, []);
+  }, [session]);
   const [connectionDetails, setConnectionDetails] = React.useState<ConnectionDetails | undefined>(
     undefined,
   );
